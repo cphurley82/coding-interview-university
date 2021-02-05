@@ -3,14 +3,9 @@ cmake_minimum_required(VERSION 3.19)
 project(
   coding-interview-university
   VERSION 0.1
-  LANGUAGES C)
+  LANGUAGES C CXX)
 
 include_directories(${CMAKE_SOURCE_DIR})
-
-add_subdirectory(data-structures/arrays/c)
-
-#TODO(cphurley): Add GTest.
-
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
@@ -36,3 +31,6 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
                  ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
                  EXCLUDE_FROM_ALL)
+
+
+add_subdirectory(data-structures/arrays/c)
