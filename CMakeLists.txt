@@ -5,6 +5,9 @@ project(
   VERSION 0.1
   LANGUAGES C CXX)
 
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 include_directories(${CMAKE_SOURCE_DIR})
 
 # Download and unpack googletest at configure time
