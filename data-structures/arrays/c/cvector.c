@@ -11,15 +11,9 @@ cvector *cvector_new()
     return obj;
 }
 
-void cvector_delete(cvector *obj)
-{
-    free(obj);
-}
+void cvector_delete(cvector *obj) { free(obj); }
 
-int cvector_size(const cvector *obj)
-{
-    return obj->size;
-}
+int cvector_size(const cvector *obj) { return obj->size; }
 
 void cvector_resize(cvector *obj, const int size)
 {
@@ -27,10 +21,7 @@ void cvector_resize(cvector *obj, const int size)
     obj->capacity = size;
 }
 
-int cvector_capacity(const cvector *obj)
-{
-    return obj->capacity;
-}
+int cvector_capacity(const cvector *obj) { return obj->capacity; }
 
 bool cvector_is_empty(const cvector *obj)
 {
