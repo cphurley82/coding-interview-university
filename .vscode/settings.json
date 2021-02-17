@@ -1,0 +1,31 @@
+{
+    "files.associations": {
+        "cvector.h": "c",
+        "__bit_reference": "c",
+        "__functional_03": "c",
+        "__split_buffer": "c",
+        "array": "c",
+        "deque": "c",
+        "string_view": "c",
+        "functional": "c",
+        "locale": "c",
+        "map": "c",
+        "set": "c",
+        "sstream": "c",
+        "string": "c",
+        "vector": "c",
+        "*.tcc": "c",
+        "list": "c",
+        "memory": "c",
+        "__hash_table": "c",
+        "__tree": "c",
+        "bitset": "c",
+        "initializer_list": "c",
+        "iterator": "c",
+        "unordered_map": "c",
+        "unordered_set": "c",
+        "utility": "c",
+        "hashtable": "c"
+    },
+    "clang-format.fallbackStyle": "Google"
+}
