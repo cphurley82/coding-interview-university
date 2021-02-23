@@ -36,6 +36,12 @@ int cvector_at_int(const cvector* const obj, int index) {
   return obj->data[index];
 }
 
+void cvector_push_int(cvector* const obj, int value) {
+  int new_index = cvector_size_ints(obj);
+  cvector_resize_ints(obj, new_index + 1);
+  cvector_set_int(obj, new_index, value);
+}
+
 void cvector_set_int(cvector* const obj, const int index, const int value) {
   if (index >= cvector_size_ints(obj)) {
     cvector_resize_ints(obj, index + 1);
@@ -102,4 +108,10 @@ int cvector_util_determine_min_capacity_ints_from_size_bytes(int size_bytes) {
 uint8_t cvector_at_byte(const cvector* const obj, int index) {
   assert(obj->size_bytes > index);
   return *((uint8_t*)obj->data + index);
+}
+
+void cvector_push_byte(cvector* const obj, uint8_t value) {
+  int new_index = cvector_size_bytes(obj);
+  cvector_resize_bytes(obj, new_index + 1);
+  cvector_set_byte(obj, new_index, value);
 }
