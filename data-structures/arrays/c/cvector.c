@@ -49,6 +49,15 @@ void cvector_set_int(cvector* const obj, const int index, const int value) {
   obj->data[index] = value;
 }
 
+void cvector_insert_int(cvector* const obj, int index, int value) {
+  int new_size = cvector_size_ints(obj) + 1;
+  cvector_resize_ints(obj, new_size);  // Will clobber extra bytes.
+  for (int source_index = new_size - 1; source_index > index; source_index--) {
+    cvector_set_int(obj, source_index, cvector_at_int(obj, source_index - 1));
+  }
+  cvector_set_int(obj, index, value);
+}
+
 int cvector_size_bytes(const cvector* const obj) { return obj->size_bytes; }
 
 void cvector_resize_bytes(cvector* const obj, const int size_bytes) {
@@ -114,4 +123,13 @@ void cvector_push_byte(cvector* const obj, uint8_t value) {
   int new_index = cvector_size_bytes(obj);
   cvector_resize_bytes(obj, new_index + 1);
   cvector_set_byte(obj, new_index, value);
+}
+
+void cvector_insert_byte(cvector* const obj, int index, uint8_t value) {
+  int new_size = cvector_size_bytes(obj) + 1;
+  cvector_resize_bytes(obj, new_size);
+  for (int source_index = new_size - 1; source_index > index; source_index--) {
+    cvector_set_byte(obj, source_index, cvector_at_byte(obj, source_index - 1));
+  }
+  cvector_set_byte(obj, index, value);
 }

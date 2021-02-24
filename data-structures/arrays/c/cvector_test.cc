@@ -145,3 +145,45 @@ TEST_F(CVectorTest, PushMixed) {
     EXPECT_EQ(cvector_at_byte(obj_, i + sizeof(int)), i + 1) << "i=" << i;
   }
 }
+
+TEST_F(CVectorTest, InsertInt) {
+  cvector_set_int(obj_, 0, 1);
+  cvector_set_int(obj_, 1, 3);
+
+  cvector_insert_int(obj_, 1, 2);
+
+  EXPECT_EQ(cvector_at_int(obj_, 0), 1);
+  EXPECT_EQ(cvector_at_int(obj_, 1), 2);
+  EXPECT_EQ(cvector_at_int(obj_, 2), 3);
+}
+
+TEST_F(CVectorTest, InsertByte) {
+  cvector_set_byte(obj_, 0, 1);
+  cvector_set_byte(obj_, 1, 3);
+
+  cvector_insert_byte(obj_, 1, 2);
+
+  EXPECT_EQ(cvector_at_byte(obj_, 0), 1);
+  EXPECT_EQ(cvector_at_byte(obj_, 1), 2);
+  EXPECT_EQ(cvector_at_byte(obj_, 2), 3);
+}
+
+TEST_F(CVectorTest, InsertMixed) {
+  cvector_set_int(obj_, 0, UINT_MAX);  // All 0xF.
+  cvector_insert_byte(obj_, 1, 0);
+
+  EXPECT_EQ(cvector_at_byte(obj_, 0), 0xFF);
+  EXPECT_EQ(cvector_at_byte(obj_, 1), 0);
+  EXPECT_EQ(cvector_at_byte(obj_, 2), 0xFF);
+  EXPECT_EQ(cvector_at_byte(obj_, 3), 0xFF);
+  EXPECT_EQ(cvector_at_byte(obj_, 4), 0xFF);
+
+  cvector_insert_int(obj_, 1, 1);
+
+  EXPECT_EQ(cvector_at_byte(obj_, 0), 0xFF);
+  EXPECT_EQ(cvector_at_byte(obj_, 1), 0);
+  EXPECT_EQ(cvector_at_byte(obj_, 2), 0xFF);
+  EXPECT_EQ(cvector_at_byte(obj_, 3), 0xFF);
+
+  EXPECT_EQ(cvector_at_int(obj_, 1), 1);
+}

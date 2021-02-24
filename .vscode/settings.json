@@ -25,7 +25,8 @@
         "unordered_map": "c",
         "unordered_set": "c",
         "utility": "c",
-        "hashtable": "c"
+        "hashtable": "c",
+        "iosfwd": "c"
     },
     "clang-format.fallbackStyle": "Google"
 }
