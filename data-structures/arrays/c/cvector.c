@@ -58,6 +58,10 @@ void cvector_insert_int(cvector* const obj, int index, int value) {
   cvector_set_int(obj, index, value);
 }
 
+void cvector_prepend_int(cvector* const obj, int value) {
+  cvector_insert_int(obj, 0, value);
+}
+
 int cvector_size_bytes(const cvector* const obj) { return obj->size_bytes; }
 
 void cvector_resize_bytes(cvector* const obj, const int size_bytes) {
@@ -132,4 +136,8 @@ void cvector_insert_byte(cvector* const obj, int index, uint8_t value) {
     cvector_set_byte(obj, source_index, cvector_at_byte(obj, source_index - 1));
   }
   cvector_set_byte(obj, index, value);
+}
+
+void cvector_prepend_byte(cvector* const obj, int value) {
+  cvector_insert_byte(obj, 0, value);
 }

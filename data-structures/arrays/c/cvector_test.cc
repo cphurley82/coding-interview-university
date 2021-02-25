@@ -187,3 +187,24 @@ TEST_F(CVectorTest, InsertMixed) {
 
   EXPECT_EQ(cvector_at_int(obj_, 1), 1);
 }
+
+TEST_F(CVectorTest, PrependInt) {
+  cvector_push_int(obj_, UINT_MAX);
+  cvector_prepend_int(obj_, 1);
+  EXPECT_EQ(cvector_at_int(obj_, 0), 1);
+  EXPECT_EQ(cvector_at_int(obj_, 1), UINT_MAX);
+}
+
+TEST_F(CVectorTest, PrependByte) {
+  cvector_push_byte(obj_, UCHAR_MAX);
+  cvector_prepend_byte(obj_, 1);
+  EXPECT_EQ(cvector_at_byte(obj_, 0), 1);
+  EXPECT_EQ(cvector_at_byte(obj_, 1), UCHAR_MAX);
+}
+
+TEST_F(CVectorTest, PrependMixed) {
+  cvector_prepend_int(obj_, 0);
+  cvector_prepend_byte(obj_, 1);
+  EXPECT_EQ(cvector_at_byte(obj_, 0), 1);
+  EXPECT_EQ(cvector_at_byte(obj_, 1), 0);
+}
