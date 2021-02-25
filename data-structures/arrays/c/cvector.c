@@ -62,6 +62,13 @@ void cvector_prepend_int(cvector* const obj, int value) {
   cvector_insert_int(obj, 0, value);
 }
 
+int cvector_pop_int(cvector* const obj) {
+  int last_index = cvector_size_ints(obj) - 1;
+  int value = cvector_at_int(obj, last_index);
+  cvector_resize_ints(obj, last_index);
+  return value;
+}
+
 int cvector_size_bytes(const cvector* const obj) { return obj->size_bytes; }
 
 void cvector_resize_bytes(cvector* const obj, const int size_bytes) {
@@ -140,4 +147,11 @@ void cvector_insert_byte(cvector* const obj, int index, uint8_t value) {
 
 void cvector_prepend_byte(cvector* const obj, int value) {
   cvector_insert_byte(obj, 0, value);
+}
+
+uint8_t cvector_pop_byte(cvector* const obj) {
+  int last_index = cvector_size_bytes(obj) - 1;
+  uint8_t value = cvector_at_byte(obj, last_index);
+  cvector_resize_bytes(obj, last_index);
+  return value;
 }

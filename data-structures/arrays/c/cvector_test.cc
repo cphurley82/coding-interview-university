@@ -208,3 +208,31 @@ TEST_F(CVectorTest, PrependMixed) {
   EXPECT_EQ(cvector_at_byte(obj_, 0), 1);
   EXPECT_EQ(cvector_at_byte(obj_, 1), 0);
 }
+
+TEST_F(CVectorTest, PopInt) {
+  for (auto i = 0; i < 10; i++) {
+    cvector_push_int(obj_, i);
+  }
+
+  for (auto i = 9; i >= 0; i--) {
+    EXPECT_EQ(cvector_pop_int(obj_), i);
+  }
+}
+
+TEST_F(CVectorTest, PopByte) {
+  for (auto i = 0; i < 10; i++) {
+    cvector_push_byte(obj_, i);
+  }
+
+  for (auto i = 9; i >= 0; i--) {
+    EXPECT_EQ(cvector_pop_byte(obj_), i);
+  }
+}
+
+TEST_F(CVectorTest, PopMixed) {
+  cvector_push_int(obj_, UINT_MAX);
+  cvector_push_byte(obj_, 1);
+
+  EXPECT_EQ(cvector_pop_byte(obj_), 1);
+  EXPECT_EQ(cvector_pop_int(obj_), UINT_MAX);
+}
