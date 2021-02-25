@@ -236,3 +236,25 @@ TEST_F(CVectorTest, PopMixed) {
   EXPECT_EQ(cvector_pop_byte(obj_), 1);
   EXPECT_EQ(cvector_pop_int(obj_), UINT_MAX);
 }
+
+TEST_F(CVectorTest, DeleteInt) {
+  cvector_push_int(obj_, 0xA);
+  cvector_push_int(obj_, 0xB);
+  cvector_push_int(obj_, 0xC);
+
+  cvector_delete_int(obj_, 1);
+
+  EXPECT_EQ(cvector_at_int(obj_, 0), 0xA);
+  EXPECT_EQ(cvector_at_int(obj_, 1), 0xC);
+}
+
+TEST_F(CVectorTest, DeleteByte) {
+  cvector_push_byte(obj_, 0xA);
+  cvector_push_byte(obj_, 0xB);
+  cvector_push_byte(obj_, 0xC);
+
+  cvector_delete_byte(obj_, 1);
+
+  EXPECT_EQ(cvector_at_byte(obj_, 0), 0xA);
+  EXPECT_EQ(cvector_at_byte(obj_, 1), 0xC);
+}

@@ -69,6 +69,14 @@ int cvector_pop_int(cvector* const obj) {
   return value;
 }
 
+void cvector_delete_int(cvector* const obj, int index) {
+  int new_size = cvector_size_ints(obj) - 1;
+  for (int source_index = new_size; source_index > index; source_index--) {
+    cvector_set_int(obj, source_index - 1, cvector_at_int(obj, source_index));
+  }
+  cvector_resize_ints(obj, new_size);  // Will leave off extra bytes.
+}
+
 int cvector_size_bytes(const cvector* const obj) { return obj->size_bytes; }
 
 void cvector_resize_bytes(cvector* const obj, const int size_bytes) {
@@ -154,4 +162,12 @@ uint8_t cvector_pop_byte(cvector* const obj) {
   uint8_t value = cvector_at_byte(obj, last_index);
   cvector_resize_bytes(obj, last_index);
   return value;
+}
+
+void cvector_delete_byte(cvector* const obj, int index) {
+  int new_size = cvector_size_bytes(obj) - 1;
+  for (int source_index = new_size; source_index > index; source_index--) {
+    cvector_set_byte(obj, source_index - 1, cvector_at_byte(obj, source_index));
+  }
+  cvector_resize_bytes(obj, new_size);  // Will leave off extra bytes.
 }
