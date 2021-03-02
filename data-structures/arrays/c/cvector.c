@@ -70,11 +70,25 @@ int cvector_pop_int(cvector* const obj) {
 }
 
 void cvector_delete_int(cvector* const obj, int index) {
-  int new_size = cvector_size_ints(obj) - 1;
-  for (int source_index = new_size; source_index > index; source_index--) {
+  int size = cvector_size_ints(obj);
+  for (int source_index = index + 1; source_index < size; source_index++) {
     cvector_set_int(obj, source_index - 1, cvector_at_int(obj, source_index));
   }
-  cvector_resize_ints(obj, new_size);  // Will leave off extra bytes.
+  cvector_resize_ints(obj, size - 1);  // Will leave off extra bytes.
+}
+
+void cvector_remove_int(cvector* const obj, int value) {
+  // Loop through each value and if it matchs the one being removed, delete it.
+  // The exit condition for the loop will udpate if the size shrinks.
+  for (int index = 0; index < cvector_size_ints(obj); index++) {
+    if (cvector_at_int(obj, index) == value) {
+      cvector_delete_int(obj, index);
+
+      // Negate the index increment because with the item removed, we need to
+      // check the same index again.
+      index--;
+    }
+  }
 }
 
 int cvector_size_bytes(const cvector* const obj) { return obj->size_bytes; }
@@ -165,9 +179,23 @@ uint8_t cvector_pop_byte(cvector* const obj) {
 }
 
 void cvector_delete_byte(cvector* const obj, int index) {
-  int new_size = cvector_size_bytes(obj) - 1;
-  for (int source_index = new_size; source_index > index; source_index--) {
+  int size = cvector_size_bytes(obj);
+  for (int source_index = index + 1; source_index < size; source_index++) {
     cvector_set_byte(obj, source_index - 1, cvector_at_byte(obj, source_index));
   }
-  cvector_resize_bytes(obj, new_size);  // Will leave off extra bytes.
+  cvector_resize_bytes(obj, size - 1);  // Will leave off extra bytes.
+}
+
+void cvector_remove_byte(cvector* const obj, uint8_t value) {
+  // Loop through each value and if it matchs the one being removed, delete it.
+  // The exit condition for the loop will udpate if the size shrinks.
+  for (int index = 0; index < cvector_size_bytes(obj); index++) {
+    if (cvector_at_byte(obj, index) == value) {
+      cvector_delete_byte(obj, index);
+
+      // Negate the index increment because with the item removed, we need to
+      // check the same index again.
+      index--;
+    }
+  }
 }

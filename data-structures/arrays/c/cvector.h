@@ -23,6 +23,7 @@ void cvector_insert_int(cvector* const obj, int index, int value);
 void cvector_prepend_int(cvector* const obj, int value);
 int cvector_pop_int(cvector* const obj);
 void cvector_delete_int(cvector* const obj, int index);
+void cvector_remove_int(cvector* const obj, int value);
 
 int cvector_size_bytes(const cvector* const obj);
 void cvector_resize_bytes(cvector* const obj, const int size_bytes);
@@ -33,6 +34,7 @@ void cvector_insert_byte(cvector* const obj, int index, uint8_t value);
 void cvector_prepend_byte(cvector* const obj, int value);
 uint8_t cvector_pop_byte(cvector* const obj);
 void cvector_delete_byte(cvector* const obj, int index);
+void cvector_remove_byte(cvector* const obj, uint8_t value);
 
 // Internal utility functions.
 int cvector_util_round_up_to_power_of_two(int number);
