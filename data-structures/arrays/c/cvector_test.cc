@@ -308,3 +308,51 @@ TEST_F(CVectorFixture, RemoveByte) {
   EXPECT_EQ(cvector_at_byte(obj_, 1), 4);
   EXPECT_EQ(cvector_size_bytes(obj_), 2);
 }
+
+TEST_F(CVectorFixture, FindInt) {
+  cvector_push_int(obj_, 0);
+  cvector_push_int(obj_, 1);
+  cvector_push_int(obj_, 2);
+  cvector_push_int(obj_, 2);
+  cvector_push_int(obj_, 3);
+  cvector_push_int(obj_, 4);
+  cvector_push_int(obj_, 0);
+
+  EXPECT_EQ(cvector_find_int(obj_, 0xA), -1);
+
+  EXPECT_EQ(cvector_find_int(obj_, 0), 0);
+  EXPECT_EQ(cvector_find_int(obj_, 1), 1);
+  EXPECT_EQ(cvector_find_int(obj_, 2), 2);
+  EXPECT_EQ(cvector_find_int(obj_, 3), 4);
+  EXPECT_EQ(cvector_find_int(obj_, 4), 5);
+
+  cvector_remove_int(obj_, 2);
+  EXPECT_EQ(cvector_find_int(obj_, 2), -1);
+
+  cvector_remove_int(obj_, 0);
+  EXPECT_EQ(cvector_find_int(obj_, 0), -1);
+}
+
+TEST_F(CVectorFixture, FindByte) {
+  cvector_push_byte(obj_, 0);
+  cvector_push_byte(obj_, 1);
+  cvector_push_byte(obj_, 2);
+  cvector_push_byte(obj_, 2);
+  cvector_push_byte(obj_, 3);
+  cvector_push_byte(obj_, 4);
+  cvector_push_byte(obj_, 0);
+
+  EXPECT_EQ(cvector_find_byte(obj_, 0xA), -1);
+
+  EXPECT_EQ(cvector_find_byte(obj_, 0), 0);
+  EXPECT_EQ(cvector_find_byte(obj_, 1), 1);
+  EXPECT_EQ(cvector_find_byte(obj_, 2), 2);
+  EXPECT_EQ(cvector_find_byte(obj_, 3), 4);
+  EXPECT_EQ(cvector_find_byte(obj_, 4), 5);
+
+  cvector_remove_byte(obj_, 2);
+  EXPECT_EQ(cvector_find_byte(obj_, 2), -1);
+
+  cvector_remove_byte(obj_, 0);
+  EXPECT_EQ(cvector_find_byte(obj_, 0), -1);
+}

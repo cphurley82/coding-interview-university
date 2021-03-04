@@ -91,6 +91,15 @@ void cvector_remove_int(cvector* const obj, int value) {
   }
 }
 
+int cvector_find_int(cvector* const obj, int value) {
+  for (int index = 0; index < cvector_size_ints(obj); index++) {
+    if (cvector_at_int(obj, index) == value) {
+      return index;
+    }
+  }
+  return -1;
+}
+
 int cvector_size_bytes(const cvector* const obj) { return obj->size_bytes; }
 
 void cvector_resize_bytes(cvector* const obj, const int size_bytes) {
@@ -198,4 +207,13 @@ void cvector_remove_byte(cvector* const obj, uint8_t value) {
       index--;
     }
   }
+}
+
+int cvector_find_byte(cvector* const obj, uint8_t value) {
+  for (int index = 0; index < cvector_size_bytes(obj); index++) {
+    if (cvector_at_byte(obj, index) == value) {
+      return index;
+    }
+  }
+  return -1;
 }
