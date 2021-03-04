@@ -26,6 +26,30 @@ TEST_F(CVectorFixture, Resize) {
   EXPECT_EQ(cvector_at_int(obj_, 0), 1);
 }
 
+TEST_F(CVectorFixture, SizeDoublesWhenPushing) {
+  EXPECT_EQ(cvector_capacity_ints(obj_), 0);
+
+  // Size 1.
+  cvector_push_int(obj_, 0);
+  EXPECT_EQ(cvector_capacity_ints(obj_), 1);
+
+  // Size 2.
+  cvector_push_int(obj_, 0);
+  EXPECT_EQ(cvector_capacity_ints(obj_), 2);
+
+  // Size 3.
+  cvector_push_int(obj_, 0);
+  EXPECT_EQ(cvector_capacity_ints(obj_), 4);
+
+  // Size 4.
+  cvector_push_int(obj_, 0);
+  EXPECT_EQ(cvector_capacity_ints(obj_), 4);
+
+  // Size 5.
+  cvector_push_int(obj_, 0);
+  EXPECT_EQ(cvector_capacity_ints(obj_), 8);
+}
+
 TEST_F(CVectorFixture, Capacity) {
   EXPECT_GE(cvector_capacity_ints(obj_), 0);
   cvector_resize_ints(obj_, 1);
