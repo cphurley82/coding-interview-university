@@ -1,6 +1,7 @@
 #include "data-structures/arrays/c/cvector.h"
 
 #include <assert.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -103,11 +104,24 @@ int cvector_find_int(cvector* const obj, int value) {
 int cvector_size_bytes(const cvector* const obj) { return obj->size_bytes; }
 
 void cvector_resize_bytes(cvector* const obj, const int size_bytes) {
-  // If the new size is larger than the current capacity.
-  if (size_bytes > obj->capacity_ints * sizeof(int)) {
+  // Too big to fit.
+  bool growing = size_bytes > obj->capacity_ints * sizeof(int);
+
+  // New size is a quarter of capacity of less.
+  bool shrinking = size_bytes <= obj->capacity_ints * sizeof(int) / 4;
+
+  // Grow or shrink capacity as needed.
+  if (growing || shrinking) {
+    // Determine new size.
+    int new_capacity_ints = 0;
+    if (growing) {
+      new_capacity_ints =
+          cvector_util_determine_min_capacity_ints_from_size_bytes(size_bytes);
+    } else {  // shrinking.
+      new_capacity_ints = obj->capacity_ints / 2;
+    }
+
     // Create new data space for data big enough.
-    int new_capacity_ints =
-        cvector_util_determine_min_capacity_ints_from_size_bytes(size_bytes);
     int* new_data = malloc(new_capacity_ints * sizeof(int));
 
     // Copy the old data to the new space.
