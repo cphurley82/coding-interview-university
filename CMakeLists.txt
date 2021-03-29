@@ -5,7 +5,6 @@ project(
   VERSION 0.1
   LANGUAGES C CXX)
 
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include_directories(${CMAKE_SOURCE_DIR})
@@ -35,5 +34,7 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
                  ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
                  EXCLUDE_FROM_ALL)
 
+# Google Benchmark
+find_package(benchmark REQUIRED)
 
 add_subdirectory(data-structures/arrays/c)

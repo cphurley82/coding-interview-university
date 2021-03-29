@@ -16,6 +16,19 @@
             "console": "externalTerminal",
             "MIMode": "lldb",
             // "preLaunchTask": "C/C++: clang++ build active file"
+        },
+        {
+            "name": "lldb cvector-benchmark",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/data-structures/arrays/c/cvector-benchmark",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/data-structures/arrays/c",
+            "environment": [],
+            "console": "externalTerminal",
+            "MIMode": "lldb",
+            // "preLaunchTask": "C/C++: clang++ build active file"
         }
     ]
 }
